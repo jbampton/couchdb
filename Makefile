@@ -136,6 +136,12 @@ endif
 fauxton: share/www
 
 
+.PHONY: escriptize
+# target: escriptize - Build CLI tools
+escriptize:
+	@$(REBAR) -r escriptize apps=weatherreport
+
+
 ################################################################################
 # Testing
 ################################################################################
@@ -332,7 +338,7 @@ introspect:
 
 .PHONY: dist
 # target: dist - Make release tarball
-dist: all derived
+dist: all derived escriptize
 	@./build-aux/couchdb-build-release.sh $(COUCHDB_VERSION)
 
 	@cp -r share/www apache-couchdb-$(COUCHDB_VERSION)/share/
@@ -401,6 +407,7 @@ clean:
 	@$(REBAR) -r clean
 	@rm -rf .rebar/
 	@rm -f bin/couchjs
+	@rm -f bin/escriptize
 	@rm -rf src/*/ebin
 	@rm -rf src/*/.rebar
 	@rm -rf src/*/priv/*.so
