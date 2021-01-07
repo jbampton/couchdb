@@ -21,7 +21,6 @@
 %% -------------------------------------------------------------------
 %%
 %% File renamed from riaknostic_config.erl to weatherreport_config.erl
-%% Copyright (c) 2014 Cloudant
 %%
 %% -------------------------------------------------------------------
 

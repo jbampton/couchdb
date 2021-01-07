@@ -24,7 +24,6 @@
 %% weatherreport_check_membership.erl and modified to work with Apache
 %% CouchDB
 %%
-%% Copyright (c) 2014 Cloudant
 %%
 %% -------------------------------------------------------------------
 
