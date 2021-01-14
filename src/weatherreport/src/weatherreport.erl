@@ -23,6 +23,7 @@
 %% File renamed from riaknostic.erl to weatherreport.erl and modified
 %% to work with Apache CouchDB
 %%
+%% Copyright (c) 2014 Cloudant
 %%
 %% -------------------------------------------------------------------
 

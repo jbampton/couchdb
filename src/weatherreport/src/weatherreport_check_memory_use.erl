@@ -24,6 +24,7 @@
 %% weatherreport_check_memory_use.erl and modified to work with Apache
 %% CouchDB
 %%
+%% Copyright (c) 2014 Cloudant
 %%
 %% -------------------------------------------------------------------
 

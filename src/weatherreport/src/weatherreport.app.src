@@ -23,6 +23,7 @@
 %% File renamed from riaknostic.app.src to weatherreport.app.src and
 %% modified to work with Apache CouchDB.
 %%
+%% Copyright (c) 2014 Cloudant
 %%
 %% -------------------------------------------------------------------
 
