@@ -46,7 +46,9 @@
     start_time="",
     update_lru_on_read=true,
     lru = couch_lru:new(),
-    n
+    couch_dbs,
+    couch_dbs_pid_to_name,
+    couch_dbs_locks
     }).
 
 dev_start() ->
@@ -294,7 +296,9 @@ init([N]) ->
                 max_dbs_open=MaxDbsOpen,
                 update_lru_on_read=UpdateLruOnRead,
                 start_time=couch_util:rfc1123_date(),
-                n=N}}.
+                couch_dbs=couch_dbs(N),
+                couch_dbs_pid_to_name=couch_dbs_pid_to_name(N),
+                couch_dbs_locks=couch_dbs_locks(N)}}.
 
 terminate(Reason, Srv) ->
     couch_log:error("couch_server terminating with ~p, state ~2048p",
@@ -898,15 +902,22 @@ couch_dbs_pid_to_name(Arg) ->
 couch_dbs_locks(Arg) ->
     name("couch_dbs_locks", Arg).
 
+
+name("couch_dbs", #server{} = Server) ->
+    Server#server.couch_dbs;
+
+name("couch_dbs_pid_to_name", #server{} = Server) ->
+    Server#server.couch_dbs_pid_to_name;
+
+name("couch_dbs_locks", #server{} = Server) ->
+    Server#server.couch_dbs_locks;
+
 name(BaseName, DbName) when is_list(DbName) ->
     name(BaseName, ?l2b(DbName));
 
 name(BaseName, DbName) when is_binary(DbName) ->
     N = 1 + erlang:phash2(DbName, num_servers()),
     name(BaseName, N);
-
-name(BaseName, #server{} = Srv) ->
-    name(BaseName, Srv#server.n);
 
 name(BaseName, N) when is_integer(N), N > 0 ->
     list_to_atom(BaseName ++ "_" ++ integer_to_list(N)).
